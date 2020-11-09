@@ -49,8 +49,9 @@ public class EmployeePayrollTest {
 		Assert.assertEquals(7, getEmployeeListFromJsonServer().size());
 	}
 	
+	@Ignore
 	@Test
-	public void givenEmployeeShouldGetUpdatedInTheJsonServer() {
+	public void givenEmployee_WhenSalaryIsUpdated_ShouldGetUpdatedInTheJsonServer() {
 		employeePayrollService.updateEmployeesalary("Jeff Bezos", 300000);
 		Employee employee = employeePayrollService.getEmployee("Jeff Bezos");
 		String empJson = new Gson().toJson(employee);
@@ -59,6 +60,12 @@ public class EmployeePayrollTest {
 		request.body(empJson);
 		Response response = request.put("/employees/" + employee.getId());
 		Assert.assertEquals(200, response.getStatusCode());
+	}
+	
+	@Test
+	public void givenEmployeeListInServer_WhenRetrieved_ShouldMatchTheCount() {
+		List<Employee> employees = this.getEmployeeListFromJsonServer();
+		Assert.assertEquals(7, employees.size());
 	}
 
 	private Response addEmployeeToJsonServer(Employee employee) {
