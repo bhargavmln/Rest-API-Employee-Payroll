@@ -17,4 +17,12 @@ public class Employee {
 		this.salary = salary;
 		this.date = LocalDate.now();
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
 }

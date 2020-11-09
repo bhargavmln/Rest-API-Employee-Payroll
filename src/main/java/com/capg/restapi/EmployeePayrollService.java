@@ -15,8 +15,12 @@ public class EmployeePayrollService {
 		employees.add(employee);
 	}
 
-	public List<Employee> getEmployeeList() {
+	public List<Employee> getEmployeeFromList() {
 		return employees;
+	}
+	
+	public void addEmployeeToList(List<Employee> employees) {
+		employees.forEach(employee -> this.employees.add(employee));
 	}
 
 	public int getCount() {
