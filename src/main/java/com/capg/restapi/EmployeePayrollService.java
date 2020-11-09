@@ -26,5 +26,17 @@ public class EmployeePayrollService {
 	public int getCount() {
 		return employees.size();
 	}
-	
+
+	public void updateEmployeesalary(String name, double salary) {
+		Employee employee = this.employees.stream().filter(emp -> emp.getName().equals(name))
+										  .findAny()
+										  .orElse(null);
+		employee.setSalary(salary);
+	}
+
+	public Employee getEmployee(String name) {
+		return this.employees.stream().filter(emp -> emp.getName().equals(name))
+								      .findAny()
+								      .orElse(null);
+	}
 }

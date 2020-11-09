@@ -37,6 +37,7 @@ public class EmployeePayrollTest {
 		Assert.assertEquals(4, count);
 	}
 
+	@Ignore
 	@Test
 	public void givenEmployeeList_WhenAdded_ShouldReturnAddedCount() {
 		List<Employee> employees = new ArrayList<>();
@@ -46,6 +47,18 @@ public class EmployeePayrollTest {
 		employeePayrollService.addEmployeeToList(employees);
 		addMultipleEmployeeUsingThreads(employees);
 		Assert.assertEquals(7, getEmployeeListFromJsonServer().size());
+	}
+	
+	@Test
+	public void givenEmployeeShouldGetUpdatedInTheJsonServer() {
+		employeePayrollService.updateEmployeesalary("Jeff Bezos", 300000);
+		Employee employee = employeePayrollService.getEmployee("Jeff Bezos");
+		String empJson = new Gson().toJson(employee);
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		request.body(empJson);
+		Response response = request.put("/employees/" + employee.getId());
+		Assert.assertEquals(200, response.getStatusCode());
 	}
 
 	private Response addEmployeeToJsonServer(Employee employee) {

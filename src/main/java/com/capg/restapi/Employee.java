@@ -14,7 +14,7 @@ public class Employee {
 		this.name = name;
 		this.gender = gender;
 		this.id = id;
-		this.salary = salary;
+		this.setSalary(salary);
 		this.date = LocalDate.now();
 	}
 
@@ -24,5 +24,13 @@ public class Employee {
 
 	public String getName() {
 		return name;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
 	}
 }
