@@ -19,6 +19,10 @@ public class EmployeePayrollService {
 		return employees;
 	}
 	
+	public void deleteEmployeeFromList(Employee employee) {
+		this.employees.remove(employee);
+	}
+	
 	public void addEmployeeToList(List<Employee> employees) {
 		employees.forEach(employee -> this.employees.add(employee));
 	}

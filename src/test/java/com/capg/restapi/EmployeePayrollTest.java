@@ -62,10 +62,21 @@ public class EmployeePayrollTest {
 		Assert.assertEquals(200, response.getStatusCode());
 	}
 	
+	@Ignore
 	@Test
 	public void givenEmployeeListInServer_WhenRetrieved_ShouldMatchTheCount() {
 		List<Employee> employees = this.getEmployeeListFromJsonServer();
 		Assert.assertEquals(7, employees.size());
+	}
+	
+	@Test
+	public void givenEmployeeWhenDeletedShouldGetDeletedFromJsonServer() {
+		Employee employee = employeePayrollService.getEmployee("Obama");
+		employeePayrollService.deleteEmployeeFromList(employee);
+		RequestSpecification request = RestAssured.given();
+		request.header("Content-Type", "application/json");
+		Response response = request.delete("/employees/" + employee.getId());
+		Assert.assertEquals(200, response.getStatusCode());
 	}
 
 	private Response addEmployeeToJsonServer(Employee employee) {
